@@ -50,7 +50,7 @@ while ($true) {
                 "Create" {
                     $branchName = gum input --placeholder "Enter new branch name"
                     if ($branchName) {
-                        gum confirm "Do you want to create a new branch: ${branchName}?" && git branch $branchName git checkout $branchName
+                        gum confirm "Do you want to create a new branch: ${branchName}?" && git branch $branchName && git checkout $branchName
                     }
                     elseif ($branchName -eq "") {
                         Write-Host "Branch creation cancelled."
