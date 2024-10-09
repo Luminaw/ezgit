@@ -54,26 +54,41 @@ switch ($action) {
                     git branch $branchName
                     git checkout $branchName
                 }
+                elseif ($branchName -eq "") {
+                    Write-Host "Branch creation cancelled."
+                }
                 else {
                     Write-Error "No branch name entered."
                 }
             }
             "Switch" {
-                $branchName = gum input --placeholder "Enter branch name to switch to"
-                if ($branchName) {
+                # Get the list of branches
+                $branches = git branch --format="%(refname:short)"
+                $branches += "Exit"
+                $branchName = gum choose $branches --header "Select a branch to switch to"
+                if ($branchName -eq "Exit") {
+                    Write-Host "Branch switching cancelled."
+                }
+                elseif ($branchName) {
                     git checkout $branchName
                 }
                 else {
-                    Write-Error "No branch name entered."
+                    Write-Error "No branch selected."
                 }
             }
             "Delete" {
-                $branchName = gum input --placeholder "Enter branch name to delete"
-                if ($branchName) {
+                # Get the list of branches
+                $branches = git branch --format="%(refname:short)"
+                $branches += "Exit"
+                $branchName = gum choose $branches --header "Select a branch to delete"
+                if ($branchName -eq "Exit") {
+                    Write-Host "Branch deletion cancelled."
+                }
+                elseif ($branchName) {
                     git branch -d $branchName
                 }
                 else {
-                    Write-Error "No branch name entered."
+                    Write-Error "No branch selected."
                 }
             }
         }
