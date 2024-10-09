@@ -22,7 +22,8 @@ jobs:
       - name: Convert PowerShell script to executable
         run: |
           Import-Module ps2exe
-          ps2exe .\ezgit.ps1 .\ezgit.exe
+          Invoke-ps2exe -inputFile .\ezgit.ps1 -outputFile .\ezgit.exe
+        shell: pwsh
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
