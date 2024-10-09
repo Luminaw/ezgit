@@ -11,7 +11,7 @@
 - [x] **Pull**: Pulls changes from the remote repository.
 - [x] **Fetch**: Fetches changes from the remote repository.
 - [x] **Branch**: Allows creating, switching, or deleting branches.
-- [ ] **Merge**: Merges 2 branches.
+- [x] **Merge**: Merges 2 branches.
 - [x] **Init**: Initializes a new Git repository.
 - [x] **Help**: Displays help information.
 - [x] **Exit**: Exits the `ezgit` tool.

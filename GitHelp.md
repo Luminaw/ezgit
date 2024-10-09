@@ -6,6 +6,7 @@
 - Pull: Fetch and merge changes from a remote repository.
 - Fetch: Download changes from a remote repository without merging.
 - Branch: Create, list, or delete branches.
+- Merge: Combine changes from one branch into another.
 - Init: Initialize a new git repository.
 - Help: Display help information about git commands.
 - Exit: Exit the git command-line interface.
