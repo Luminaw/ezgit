@@ -108,7 +108,7 @@ switch ($action) {
                 Write-Host "Branch merging cancelled."
             }
             elseif ($mergeFrom) {
-                gum confirm "Do you want to merge $mergeFrom > $mergeTo?" && git checkout $mergeTo && git merge $mergeFrom
+                gum confirm "Do you want to merge {$mergeFrom} > {$mergeTo}?" && git checkout $mergeTo && git merge $mergeFrom
             }
             else {
                 Write-Error "No branch selected."
