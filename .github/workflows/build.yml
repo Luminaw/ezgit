@@ -1,0 +1,79 @@
+name: Build and Release
+
+on:
+  push:
+    branches:
+      - master
+  release:
+    types:
+      - created
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up PowerShell
+        uses: actions/setup-powershell@v1
+
+      - name: Install ps2exe
+        run: Install-Module -Name ps2exe -Scope CurrentUser -Force -SkipPublisherCheck
+
+      - name: Convert PowerShell script to executable
+        run: |
+          Import-Module ps2exe
+          ps2exe .\ezgit.ps1 .\ezgit.exe
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: ezgit-executable
+          path: .\ezgit.exe
+
+  prerelease:
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push'
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Download artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: ezgit-executable
+          path: .
+
+      - name: Create GitHub Pre-release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: ezgit.exe
+          prerelease: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.event_name == 'release'
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Download artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: ezgit-executable
+          path: .
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: ezgit.exe
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
