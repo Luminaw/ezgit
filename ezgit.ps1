@@ -45,7 +45,7 @@ switch ($action) {
     }
     "Branch" {
         # Use gum to display a menu for branch actions
-        $branchAction = gum choose "Create" "Switch" "Delete" --header "Select a branch action"
+        $branchAction = gum choose "Create" "Switch" "Delete" "Exit" --header "Select a branch action"
         
         switch ($branchAction) {
             "Create" {
@@ -90,6 +90,9 @@ switch ($action) {
                 else {
                     Write-Error "No branch selected."
                 }
+            }
+            "Exit" {
+                Write-Host "Branch action cancelled."
             }
         }
     }
