@@ -21,8 +21,7 @@ switch ($action) {
     "Commit" { 
         $commitMessage = gum input --placeholder "Enter commit message"
         if ($commitMessage) {
-            git add .
-            git commit -m $commitMessage
+            gum confirm "Do you want to commit with message: ${commitMessage}?" && git add . && git commit -m $commitMessage
         }
         else {
             Write-Error "No commit message entered."
@@ -51,8 +50,7 @@ switch ($action) {
             "Create" {
                 $branchName = gum input --placeholder "Enter new branch name"
                 if ($branchName) {
-                    git branch $branchName
-                    git checkout $branchName
+                    gum confirm "Do you want to create a new branch: ${branchName}?" && git branch $branchName git checkout $branchName
                 }
                 elseif ($branchName -eq "") {
                     Write-Host "Branch creation cancelled."
@@ -85,7 +83,7 @@ switch ($action) {
                     Write-Host "Branch deletion cancelled."
                 }
                 elseif ($branchName) {
-                    git branch -d $branchName
+                    gum confirm "Do you want to delete the branch ${branchName}?" && git branch -d $branchName
                 }
                 else {
                     Write-Error "No branch selected."
