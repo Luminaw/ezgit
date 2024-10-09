@@ -97,13 +97,13 @@ switch ($action) {
         # Get the list of branches
         $branches = git branch --format="%(refname:short)"
         $branches += "Exit"
-        $mergeTo = gum choose $branches --header "Select a branch to merge to"
+        $mergeTo = gum choose $branches --header "Select a branch to merge into"
         if ($mergeTo -eq "Exit") {
             Write-Host "Branch merging cancelled."
         }
         elseif ($mergeTo) {
 
-            $mergeFrom = gum choose $branches --header "Select a branch to merge to"
+            $mergeFrom = gum choose $branches --header "Select a branch to merge from"
             if ($mergeFrom -eq "Exit") {
                 Write-Host "Branch merging cancelled."
             }
