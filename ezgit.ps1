@@ -31,7 +31,7 @@ while ($true) {
             git status
         }
         "Stash" { 
-            git stash
+            gum confirm "Do you want to stash changes?" && git stash
         }
         "Push" { 
             git push
