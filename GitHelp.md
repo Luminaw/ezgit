@@ -1,0 +1,11 @@
+# How to use Git
+- Commit: Save changes to the local repository.
+- Status: Show the current state of the working directory and staging area.
+- Stash: Temporarily save changes without committing.
+- Push: Upload local commits to a remote repository.
+- Pull: Fetch and merge changes from a remote repository.
+- Fetch: Download changes from a remote repository without merging.
+- Branch: Create, list, or delete branches.
+- Init: Initialize a new git repository.
+- Help: Display help information about git commands.
+- Exit: Exit the git command-line interface.

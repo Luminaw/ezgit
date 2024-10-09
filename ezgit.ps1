@@ -15,7 +15,7 @@ $header =
 Write-Output $header
 
 # Use gum to display a menu for git actions
-$action = gum choose "Commit" "Status" "Stash" "Push" "Pull" "Fetch" "Branch" "Init" "Exit" --header "Select a git action"
+$action = gum choose "Commit" "Status" "Stash" "Push" "Pull" "Fetch" "Branch" "Init" "Help" "Exit" --header "Select a git action"
 
 switch ($action) {
     "Commit" { 
@@ -80,6 +80,10 @@ switch ($action) {
     }
     "Init" {
         git init
+    }
+    "Help" {
+        # Read and display the contents of GitHelp.md
+        Get-Content -Path "GitHelp.md" -Raw | gum format -t markdown
     }
     "Exit" {
         exit 0
