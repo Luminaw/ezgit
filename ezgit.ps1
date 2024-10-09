@@ -15,7 +15,7 @@ $header =
 Write-Output $header
 
 # Use gum to display a menu for git actions
-$action = gum choose "Commit" "Status" "Stash" "Push" "Pull" "Fetch" "Branch" "Init" "Help" "Exit" --header "Select a git action"
+$action = gum choose "Commit" "Status" "Stash" "Push" "Pull" "Fetch" "Branch" "Merge" "Init" "Help" "Exit" --header "Select a git action"
 
 switch ($action) {
     "Commit" { 
@@ -91,6 +91,32 @@ switch ($action) {
                     Write-Error "No branch selected."
                 }
             }
+        }
+    }
+    "Merge" {
+        # Get the list of branches
+        $branches = git branch --format="%(refname:short)"
+        $branches += "Exit"
+        $mergeTo = gum choose $branches --header "Select a branch to merge to"
+        if ($mergeTo -eq "Exit") {
+            Write-Host "Branch merging cancelled."
+        }
+        elseif ($mergeTo) {
+
+            $mergeFrom = gum choose $branches --header "Select a branch to merge to"
+            if ($mergeFrom -eq "Exit") {
+                Write-Host "Branch merging cancelled."
+            }
+            elseif ($mergeFrom) {
+                git checkout $mergeTo
+                git merge $mergeFrom
+            }
+            else {
+                Write-Error "No branch selected."
+            }
+        }
+        else {
+            Write-Error "No branch selected."
         }
     }
     "Init" {
