@@ -16,9 +16,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Set up PowerShell
-        uses: actions/setup-powershell@v1
-
       - name: Install ps2exe
         run: Install-Module -Name ps2exe -Scope CurrentUser -Force -SkipPublisherCheck
 
