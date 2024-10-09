@@ -109,6 +109,12 @@ switch ($action) {
             }
             elseif ($mergeFrom) {
                 gum confirm "Do you want to merge ${mergeFrom} > ${mergeTo}?" && git checkout $mergeTo && git merge $mergeFrom
+                if ($LASTEXITCODE -eq 0) {
+                    $deleteBranch = gum confirm "Merge successful. Do you want to delete the branch ${mergeFrom}?"
+                    if ($deleteBranch) {
+                        git branch -d $mergeFrom
+                    }
+                }
             }
             else {
                 Write-Error "No branch selected."
