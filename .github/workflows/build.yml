@@ -18,10 +18,10 @@ jobs:
 
       - name: Install ps2exe
         run: Install-Module -Name ps2exe -Scope CurrentUser -Force -SkipPublisherCheck
+        shell: pwsh
 
       - name: Convert PowerShell script to executable
-        run: |
-          ps2exe -inputFile .\ezgit.ps1 -outputFile .\ezgit.exe
+        run: ps2exe -inputFile .\ezgit.ps1 -outputFile .\ezgit.exe
         shell: pwsh
 
       - name: Upload artifact
