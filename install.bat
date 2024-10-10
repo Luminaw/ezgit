@@ -10,8 +10,9 @@ set TARGET_DIR=%EZGIT_DIR%\bin
 
 if not exist "%TARGET_DIR%" mkdir "%TARGET_DIR%"
 
-copy "%EZGIT_DIR%ezgit.ps1" "%TARGET_DIR%"
-copy "%EZGIT_DIR%ezgit.cmd" "%TARGET_DIR%"
+REM Create symbolic links for ezgit.ps1 and ezgit.cmd in the target directory
+mklink "%TARGET_DIR%\ezgit.ps1" "%EZGIT_DIR%\ezgit.ps1"
+mklink "%TARGET_DIR%\ezgit.cmd" "%EZGIT_DIR%\ezgit.cmd"
 
 REM Add the target directory to PATH
 setx PATH "%PATH%;%TARGET_DIR%"
