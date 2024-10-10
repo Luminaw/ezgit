@@ -1,0 +1,1 @@
+7z a -tzip "ezgit-package.zip" "*"
