@@ -1,8 +1,8 @@
 @echo off
 setlocal
 
-REM Install gum using winget
-winget install charmbracelet.gum
+REM Install gum using winget and pwsh
+winget install Microsoft.PowerShell charmbracelet.gum
 
 REM Define variables
 set EZGIT_DIR=%~dp0
