@@ -1,14 +1,20 @@
 @echo off
 setlocal
 
-REM Install gum using winget and pwsh
-winget install Microsoft.PowerShell charmbracelet.gum
+REM Install PowerShell Core and gum using winget
+winget install Microsoft.PowerShell
+winget install charmbracelet.gum
 
-REM Define variables
 set EZGIT_DIR=%~dp0
+set TARGET_DIR=%EZGIT_DIR%\bin
 
-REM Add the directory containing ezgit.ps1 and ezgit.bat to PATH
-setx PATH "%PATH%;%EZGIT_DIR%"
+if not exist "%TARGET_DIR%" mkdir "%TARGET_DIR%"
 
-echo Installation complete.
+copy "%EZGIT_DIR%ezgit.ps1" "%TARGET_DIR%"
+copy "%EZGIT_DIR%ezgit.cmd" "%TARGET_DIR%"
+
+REM Add the target directory to PATH
+setx PATH "%PATH%;%TARGET_DIR%"
+
+echo Installation complete. Please restart your command prompt to apply the PATH changes.
 endlocal
